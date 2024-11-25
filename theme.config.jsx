@@ -23,7 +23,19 @@ export default {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="keywords" content={SEO_KEYWORDS} /> 
       <meta name="description" content="A comprehensive guide on how to use Telegram" />
-      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      {/* 基础favicon */}
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
+      
+      {/* 更多尺寸的PNG图标 */}
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      
+      {/* 针对Apple设备 */}
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      
+      {/* 针对Android设备 */}
+      <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
 
       {/* Google Analytics */}
       <script
@@ -40,7 +52,6 @@ export default {
           `,
         }}
       />
-      
     </>
   )
 }
