@@ -13,5 +13,6 @@ export default {
   tips: "Tips & Tricks",
   "telegram-without-phone": "How to Use Telegram Without a Phone Number",
   "how-to-find-telegram-channels": "How to Find Telegram Channels",
-  "how-to-use-telegram-bots": "How to Use Telegram Bots"
+  "how-to-use-telegram-bots": "How to Use Telegram Bots",
+  "how-to-use-telegram-to-make-money": "How to use Telegram to make money"
 }
