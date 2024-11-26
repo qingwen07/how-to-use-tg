@@ -2,24 +2,23 @@ const EXTERNAL_DATA_URL = 'https://howtousetg.com';
 
 // 假设你有一个获取所有文章的函数
 async function getAllPosts() {
-  // 实现获取所有文章的逻辑
-  return [
-    { slug: 'tips', lang: 'en' },
-    { slug: 'tips', lang: 'zh' },
-    { slug: 'security', lang: 'en' },
-    { slug: 'security', lang: 'zh' },
-    { slug: 'advanced-features', lang: 'en' },
-    { slug: 'advanced-features', lang: 'zh' },
-    { slug: 'basic-features', lang: 'en' },
-    { slug: 'basic-features', lang: 'zh' },
-    { slug: 'installation', lang: 'en' },
-    { slug: 'installation', lang: 'zh' },
-    { slug: 'telegram-without-phone', lang: 'en' },
-    { slug: 'telegram-without-phone', lang: 'zh' },
-    { slug: 'how-to-find-telegram-channels', lang: 'en' },
-    { slug: 'how-to-find-telegram-channels', lang: 'zh' },
-    // ... 更多文章
-  ];
+  // 动态导入中英文的 _meta.js 文件
+  const enMeta = (await import('./en/_meta.js')).default;
+  const zhMeta = (await import('./zh/_meta.js')).default;
+  
+  const posts = [];
+  
+  // 处理英文页面
+  Object.keys(enMeta).forEach(slug => {
+    posts.push({ slug, lang: 'en' });
+  });
+  
+  // 处理中文页面
+  Object.keys(zhMeta).forEach(slug => {
+    posts.push({ slug, lang: 'zh' });
+  });
+  
+  return posts;
 }
 
 function generateSiteMap(posts) {
@@ -35,9 +34,11 @@ function generateSiteMap(posts) {
      <!-- 添加动态页面 -->
      ${posts
        .map(({ slug, lang }) => {
+         // 如果是 index 页面，只使用语言代码
+         const path = slug === 'index' ? lang : `${lang}/${slug}`;
          return `
        <url>
-           <loc>${`${EXTERNAL_DATA_URL}/${lang}/${slug}`}</loc>
+           <loc>${`${EXTERNAL_DATA_URL}/${path}`}</loc>
            <lastmod>${new Date().toISOString()}</lastmod>
            <changefreq>daily</changefreq>
            <priority>0.8</priority>
